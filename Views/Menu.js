@@ -1,7 +1,10 @@
 import React from 'react'
 import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native'
 
+
+
 class Menu extends React.Component {
+    //STYLE HEADEAR NAVIGATION
     static navigationOptions = {
         headerStyle: {
             backgroundColor: '#FCBD20',
@@ -10,7 +13,9 @@ class Menu extends React.Component {
         headerTintColor: '#312783',
     };
 
+
     render() {
+
         return (
             <View style={styles.main_container}>
                 <View style={styles.container_white}>
@@ -40,7 +45,7 @@ class Menu extends React.Component {
                         </View>
                     </View>
                     <Text style={[styles.txt_yellowBold, styles.big_yellowTxt]}>Le menu = 12€</Text>
-                    <TouchableOpacity style={styles.buttonBlue}   onPress={() => this.props.navigation.navigate('Menu')}>
+                    <TouchableOpacity style={styles.buttonBlue}   onPress={() => this.props.navigation.navigate('CreaBurger')}>
                         <Text style={styles.buttonBlueText}> c'est partit ! </Text>
                     </TouchableOpacity>
 
