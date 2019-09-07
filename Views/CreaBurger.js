@@ -1,7 +1,7 @@
 import React from 'react'
-import {StyleSheet, View, Text, Image, TouchableOpacity, ScrollView} from 'react-native'
+import {StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, FlatList} from 'react-native'
 import Menu from "./Menu";
-import films from '../Helpers/dataIngredients'
+import pains from '../Helpers/ingredients/dataPainsIngredients'
 
 class CreaBurger extends React.Component {
     static navigationOptions = {
@@ -20,42 +20,47 @@ class CreaBurger extends React.Component {
                         <Text style={styles.titleApp}>Création de votre burger</Text>
                     </View>
                      <View style={styles.container_choice_ingredient}>
-                         <ScrollView horizontal={true}>
-                             <View>
-                                 <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                                 <Text style={{fontSize:96}}>Scroll me plz</Text>
-                             </View>
-                             <Text style={{fontSize:96}}>Scroll me plz</Text>
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Text style={{fontSize:96}}>If you like</Text>
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Text style={{fontSize:96}}>Scrolling down</Text>
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Text style={{fontSize:96}}>What's the best</Text>
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Text style={{fontSize:96}}>Framework around?</Text>
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />
-                             <Text style={{fontSize:80}}>React Native</Text>
-                         </ScrollView>
+                         <FlatList
+                             data={pains}
+                             horizontal={true}
+                             keyExtractor={item => item.id}
+                             renderItem={({item}) =>
+                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Menu')}>
+                                     <Image source={item.vignette} />
+                                     <Text>{item.name}</Text>
+                                 </TouchableOpacity>}
+                         />
+                         {/*    <Text style={{fontSize:96}}>Scroll me plz</Text>*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Text style={{fontSize:96}}>If you like</Text>*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Text style={{fontSize:96}}>Scrolling down</Text>*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Text style={{fontSize:96}}>What's the best</Text>*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Text style={{fontSize:96}}>Framework around?</Text>*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
+                         {/*    <Text style={{fontSize:80}}>React Native</Text>*/}
+                         {/*</FlatList>*/}
                         <TouchableOpacity style={styles.buttonYellow}   onPress={() => this.props.navigation.navigate('Menu')}>
                             <Text style={styles.buttonYellowText}> suivant </Text>
                         </TouchableOpacity>
