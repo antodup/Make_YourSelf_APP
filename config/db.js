@@ -12,7 +12,7 @@ class FirebaseService {
                 name: "ABC",
                 age: 2
             };
-            await this.ref.doc(id).set(defaultDoc)
+            await this.ref.doc(id).set(defaultDoc);
             return doc
         }
     }
