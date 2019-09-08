@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, FlatList, ImageBackground, TouchableWithoutFeedback} from 'react-native'
+import {StyleSheet, View, Text, Image, TouchableOpacity, FlatList, Button} from 'react-native'
 import Menu from "./Menu";
 import pains from '../Helpers/ingredients/dataPainsIngredients'
 import condiments1 from '../Helpers/ingredients/dataCondiments1Ingredients'
@@ -20,8 +20,8 @@ class CreaBurger extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataFlatList: 'pains',
-            functionFlatList : this._changeStatePains(item.image_sup, item.image_inf),
+            dataFlatList: pains,
+            functionFlatList : '',
             pains_sup: null,
             pains_inf: null,
             condiments_1: null,
@@ -33,29 +33,32 @@ class CreaBurger extends React.Component {
     }
 
     _changeStatePains = (image_sup, image_inf) => {
-        console.log('ok');
         this.setState({
             pains_sup : image_sup,
             pains_inf : image_inf,
-            dataFlatList: 'condiments1',
-            functionFlatList: this._changeCondiment1Pains(item.image)
         });
     };
+
     _changeCondiment1Pains = (image) => {
-        console.log('condiments');
         this.setState({
             condiments_1 : image,
         });
     };
 
     _suivant () {
+        console.log(this.state.dataFlatList);
         switch (this.state.dataFlatList) {
-            case "pains":
-                this.state.dataFlatList = 'condiments1';
-            case "condiments1":
-                this.state.dataFlatList = 'cheese';
+            case pains:
+                this.state.dataFlatList = condiments1;
+            case condiments1:
+                this.state.dataFlatList = cheese;
+            case cheese:
+                this.state.dataFlatList = proteines;
+            case proteines:
+                this.state.dataFlatList = condiments2;
+            case condiments2:
+                return("TERMINER")
         }
-
     };
 
     render() {
@@ -79,7 +82,7 @@ class CreaBurger extends React.Component {
                              horizontal={true}
                              keyExtractor={item => item.id.toString()}
                              renderItem={({item}) =>
-                                 <TouchableOpacity onPress={() => this.state.functionFlatList} style={styles.container_vignette}>
+                                 <TouchableOpacity onPress={() => this._changeStatePains(item.image_sup, item.image_inf)} style={styles.container_vignette}>
                                      <Image source={item.vignette} style={styles.img_vignette}/>
                                      <Text style={styles.text_ingredient}>{item.name}</Text>
                                  </TouchableOpacity>}
@@ -151,7 +154,6 @@ const styles = StyleSheet.create({
     },
     image_ingredients : {
         width: '60%',
-        height: 100,
         resizeMode: 'contain'
     },
     text_ingredient: {

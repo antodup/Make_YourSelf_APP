@@ -17,13 +17,13 @@ export default dataCheeseIngredients = [
     {
         id:115,
         name : 'Chèvre',
-        vignette : require(urlVignette + '/fromages/chevre.jpg'),
+        vignette : require(urlVignette + '/fromages/chèvre.jpg'),
         image: require(urlIngredients + 'chevre.png'),
     },
     {
         id:116,
         name : 'Fromage Végétal',
-        vignette : require(urlVignette + '/fromages/cheese_vegetal.jpg'),
-        image: require(urlIngredients + 'fromage_vegetal.png'),
+        vignette : require(urlVignette + '/fromages/fromage_vegetal.png'),
+        image: require(urlIngredients + 'cheese_vegetal.png'),
     }
 ]
