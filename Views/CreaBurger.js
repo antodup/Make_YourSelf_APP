@@ -1,7 +1,13 @@
 import React from 'react'
-import {StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, FlatList} from 'react-native'
+import {StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, FlatList, ImageBackground, TouchableWithoutFeedback} from 'react-native'
 import Menu from "./Menu";
 import pains from '../Helpers/ingredients/dataPainsIngredients'
+import condiments1 from '../Helpers/ingredients/dataCondiments1Ingredients'
+import condiments2 from '../Helpers/ingredients/dataCondiments2Ingredients'
+import proteines from '../Helpers/ingredients/dataProteinesIngredients'
+import cheese from '../Helpers/ingredients/dataCheeseIngredients'
+
+
 
 class CreaBurger extends React.Component {
     static navigationOptions = {
@@ -11,6 +17,46 @@ class CreaBurger extends React.Component {
         },
         headerTintColor: '#312783',
     };
+    constructor(props) {
+        super(props);
+        this.state = {
+            dataFlatList: 'pains',
+            functionFlatList : this._changeStatePains(item.image_sup, item.image_inf),
+            pains_sup: null,
+            pains_inf: null,
+            condiments_1: null,
+            proteines : null,
+            cheese : null,
+            condiments_2: null
+        };
+
+    }
+
+    _changeStatePains = (image_sup, image_inf) => {
+        console.log('ok');
+        this.setState({
+            pains_sup : image_sup,
+            pains_inf : image_inf,
+            dataFlatList: 'condiments1',
+            functionFlatList: this._changeCondiment1Pains(item.image)
+        });
+    };
+    _changeCondiment1Pains = (image) => {
+        console.log('condiments');
+        this.setState({
+            condiments_1 : image,
+        });
+    };
+
+    _suivant () {
+        switch (this.state.dataFlatList) {
+            case "pains":
+                this.state.dataFlatList = 'condiments1';
+            case "condiments1":
+                this.state.dataFlatList = 'cheese';
+        }
+
+    };
 
     render() {
         return (
@@ -18,57 +64,34 @@ class CreaBurger extends React.Component {
                 <View style={styles.container_white}>
                     <View style={styles.container_ingredients}>
                         <Text style={styles.titleApp}>Création de votre burger</Text>
+                        <View style={styles.container_img_ingredients}>
+                            <Image source={this.state.pains_sup} style={styles.image_ingredients}/>
+                            <Image source={this.state.condiments_1} style={styles.image_ingredients}/>
+                            <Image source={this.state.cheese} style={styles.image_ingredients}/>
+                            <Image source={this.state.proteines} style={styles.image_ingredients}/>
+                            <Image source={this.state.condiments_2} style={styles.image_ingredients}/>
+                            <Image source={this.state.pains_inf} style={styles.image_ingredients}/>
+                        </View>
                     </View>
                      <View style={styles.container_choice_ingredient}>
                          <FlatList
-                             data={pains}
+                             data={this.state.dataFlatList}
                              horizontal={true}
-                             keyExtractor={item => item.id}
+                             keyExtractor={item => item.id.toString()}
                              renderItem={({item}) =>
-                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Menu')}>
-                                     <Image source={item.vignette} />
-                                     <Text>{item.name}</Text>
+                                 <TouchableOpacity onPress={() => this.state.functionFlatList} style={styles.container_vignette}>
+                                     <Image source={item.vignette} style={styles.img_vignette}/>
+                                     <Text style={styles.text_ingredient}>{item.name}</Text>
                                  </TouchableOpacity>}
                          />
-                         {/*    <Text style={{fontSize:96}}>Scroll me plz</Text>*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Text style={{fontSize:96}}>If you like</Text>*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Text style={{fontSize:96}}>Scrolling down</Text>*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Text style={{fontSize:96}}>What's the best</Text>*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Text style={{fontSize:96}}>Framework around?</Text>*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Image source={{uri: "https://facebook.github.io/react-native/img/tiny_logo.png", width: 64, height: 64}} />*/}
-                         {/*    <Text style={{fontSize:80}}>React Native</Text>*/}
-                         {/*</FlatList>*/}
-                        <TouchableOpacity style={styles.buttonYellow}   onPress={() => this.props.navigation.navigate('Menu')}>
-                            <Text style={styles.buttonYellowText}> suivant </Text>
-                        </TouchableOpacity>
+                        <Button title={"suivant"} style={styles.buttonYellow} onPress={() => this._suivant()}>
+                        </Button>
                      </View>
                 </View>
             </View>
         )
     }
+
 
 }
 
@@ -106,9 +129,38 @@ const styles = StyleSheet.create({
         backgroundColor: "#312783",
         borderRadius: 40,
         padding : 20,
-        height: '40%'
+        height: '40%',
     },
 
+    container_img_ingredients :{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    img_vignette: {
+        width: 100,
+        height: 100,
+        borderRadius: 5
+    },
+    container_vignette: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 10
+    },
+    image_ingredients : {
+        width: '60%',
+        height: 100,
+        resizeMode: 'contain'
+    },
+    text_ingredient: {
+      marginTop: 10,
+      color: '#FFFFFF',
+        fontFamily: 'Montserrat-Light',
+        fontSize: 12
+
+    },
     buttonYellow : {
         backgroundColor: '#FFFFFF',
         width: '100%',

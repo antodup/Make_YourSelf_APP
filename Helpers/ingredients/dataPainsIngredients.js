@@ -1,7 +1,7 @@
 const urlVignette = '../../assets/img/vignette_ingredients';
 const urlIngredients = '../../assets/img/ingredients/';
 
-export default dataIngredients = [
+export default dataPainsIngredients = [
     {
         id:101,
         name : "Pain blanc",
