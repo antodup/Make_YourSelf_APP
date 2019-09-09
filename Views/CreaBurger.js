@@ -1,5 +1,5 @@
     import React from 'react'
-    import {StyleSheet, View, Text, Image, TouchableOpacity, FlatList, Button} from 'react-native'
+    import {StyleSheet, View, Text, Image, TouchableOpacity, FlatList, Modal} from 'react-native'
 
     /*HELPERS*/
     import pains from '../Helpers/ingredients/dataPainsIngredients'
@@ -7,6 +7,8 @@
     import condiments2 from '../Helpers/ingredients/dataCondiments2Ingredients'
     import proteines from '../Helpers/ingredients/dataProteinesIngredients'
     import cheese from '../Helpers/ingredients/dataCheeseIngredients'
+    import sauces from '../Helpers/ingredients/dataSauceIngredients'
+
 
     class CreaBurger extends React.Component {
         static navigationOptions = {
@@ -25,7 +27,8 @@
                 condiments_1: null,
                 proteines : null,
                 cheese : null,
-                condiments_2: null
+                condiments_2: null,
+                modalVisible : false,
             };
 
         }
@@ -86,6 +89,11 @@
                 });
             }
 
+            if (this.state.dataFlatList == condiments2) {
+                this.setState({
+                    modalVisible : true,
+                });
+            }
         };
 
         _precedent () {
@@ -133,7 +141,6 @@
         };
 
         render() {
-
             return (
                 <View style={styles.main_container}>
                     <View style={styles.container_white}>
@@ -169,11 +176,36 @@
                                 <Text style={styles.buttonYellowText}>suivant</Text>
                             </TouchableOpacity>
                          </View>
+                        <Modal
+                            animationType="slide"
+                            transparent={true}
+                            visible={this.state.modalVisible}
+                        >
+                            <View style={styles.container_modal}>
+                                <View style={styles.container_modal_txt}>
+                                    <View style={styles.container_title}>
+                                        <Text style={styles.title_sauce}>Les sauces</Text>
+                                        <Text style={styles.cross}>&#10005;</Text>
+                                    </View>
+                                    <View style={styles.container_sauce}>
+                                        <FlatList
+                                            data={sauces}
+                                            numColumns={2}
+                                            keyExtractor={item => item.id.toString()}
+                                            renderItem={({item}) =>
+                                                <TouchableOpacity onPress={() => {}} style={styles.container_vignette}>
+                                                    <Image source={item.vignette} style={styles.img_vignette_sauce}/>
+                                                    <Text style={styles.text_ingredient_sauce}>{item.name}</Text>
+                                                </TouchableOpacity>}
+                                        />
+                                    </View>
+                                </View>
+                            </View>
+                        </Modal>
                     </View>
                 </View>
             )
         }
-
     }
 
     const styles = StyleSheet.create({
@@ -249,9 +281,8 @@
         text_ingredient: {
           marginTop: 10,
           color: '#FFFFFF',
-            fontFamily: 'Montserrat-Light',
-            fontSize: 12
-
+          fontFamily: 'Montserrat-Light',
+          fontSize: 12
         },
         buttonYellow : {
             backgroundColor: '#FFFFFF',
@@ -289,7 +320,46 @@
             fontSize : 15,
             width: '100%',
             textAlign: 'center'
-        }
+        },
+        container_modal :  {
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            width: '100%',
+            height: '100%',
+            alignItems: 'center',
+            justifyContent: 'center'
+        },
+        container_modal_txt: {
+            backgroundColor: '#FFFFFF',
+            padding : 20,
+            width: '90%',
+            borderRadius : 10
+        },
+        container_title : {
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexDirection: 'row'
+        },
+        cross: {
+            color: 'rgba(0,0,0,0.5)',
+            fontSize: 50,
+        },
+        title_sauce: {
+            fontFamily: 'Montserrat-Bold',
+            color: "#312783",
+            fontSize :30,
+        },
+
+        img_vignette_sauce :  {
+            width: 142,
+            height: 142,
+            borderRadius: 5
+        },
+        text_ingredient_sauce: {
+            marginBottom: 10,
+            color: '#312783',
+            fontFamily: 'Montserrat-Light',
+            fontSize: 15
+        },
     });
 
     export default CreaBurger;
