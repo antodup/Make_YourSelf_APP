@@ -17,7 +17,7 @@ export default dataProteinesIngredients = [
     {
         id:115,
         name : "Poulet",
-        vignette : require(urlVignette + "/proteines/poulet cuit.jpg"),
+        vignette : require(urlVignette + "/proteines/poulet_cuit.jpg"),
         image: require(urlIngredients + "poulet.png"),
     },
     {
